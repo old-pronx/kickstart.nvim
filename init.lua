@@ -140,9 +140,9 @@ vim.keymap.set('n', '<leader>vs', ':vsplit<CR>', { desc = 'Vertical Split' })
 vim.keymap.set('n', '<leader>hs', ':split<CR>', { desc = 'Horizontal Split' })
 
 -- Keybinds to manipulate tabs
-vim.keymap.set('n', '<M-N>', ':tabnew<CR>', { desc = '' })
-vim.keymap.set('n', '<M-L>', ':tabnext<CR>', { desc = '' })
-vim.keymap.set('n', '<M-H>', ':tabNext<CR>', { desc = '' })
+vim.keymap.set('n', '<M-L>', ':bn<CR>', { desc = '' })
+vim.keymap.set('n', '<M-H>', ':bp<CR>', { desc = '' })
+vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = '' })
 
 -- Keybinds for VimWiki
 vim.keymap.set('n', '<leader>vwi', ':VimwikiIndex<CR>', { desc = '' })
@@ -224,6 +224,15 @@ require('lazy').setup({
           ext = '.md',
         },
       }
+    end,
+  },
+  -- using lazy.nvim
+  {
+    'akinsho/bufferline.nvim',
+    version = '*',
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require('bufferline').setup {}
     end,
   },
 
