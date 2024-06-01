@@ -48,7 +48,7 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
+-- vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -171,6 +171,9 @@ vim.keymap.set('x', '<A-k>', ":move '<-2<CR>gv-gv", { desc = '' })
 -- Stay in indent mode
 vim.keymap.set('v', '<', '<gv', { desc = '' })
 vim.keymap.set('v', '>', '>gv', { desc = '' })
+
+-- Copy to system clipboard
+vim.keymap.set('v', '<F5>', '"+y', { desc = '' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
