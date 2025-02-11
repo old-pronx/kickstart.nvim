@@ -153,9 +153,13 @@ vim.keymap.set('n', '<F6>', ':set invspell<cr>', { desc = '' })
 
 -- Auto complete brackets etc.
 vim.keymap.set('i', '"', '""<Esc>i', { desc = '' })
+vim.keymap.set('i', '""', '"', { desc = '' })
 vim.keymap.set('i', '(', '()<Esc>i', { desc = '' })
 vim.keymap.set('i', '{', '{}<Esc>i', { desc = '' })
 vim.keymap.set('i', '[', '[]<Esc>i', { desc = '' })
+
+-- Delete word with ctrl backspace
+vim.keymap.set('i', '<C-BS>', '<Esc>bcw', { desc = '' })
 
 -- Move text up and down
 vim.keymap.set('v', '<A-j>', ':m .+1<CR>==', { desc = '' })
@@ -252,7 +256,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',         opts = {} },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -287,7 +291,7 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  { -- Useful plugin to show you pending keybinds.
+  {                     -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -339,7 +343,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -432,11 +436,11 @@ require('lazy').setup({
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
-      { 'folke/neodev.nvim', opts = {} },
+      { 'folke/neodev.nvim',       opts = {} },
     },
     config = function()
       -- Brief aside: **What is LSP?**
