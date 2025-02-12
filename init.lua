@@ -161,6 +161,10 @@ vim.keymap.set('i', '[', '[]<Esc>i', { desc = '' })
 -- Delete word with ctrl backspace
 vim.keymap.set('i', '<C-BS>', '<Esc>bcw', { desc = '' })
 
+-- Move up or down a soft-wrapped line
+vim.keymap.set('n', '<C-S-j>', 'gj', { desc = '' })
+vim.keymap.set('n', '<C-S-k>', 'gk', { desc = '' })
+
 -- Move text up and down
 vim.keymap.set('v', '<A-j>', ':m .+1<CR>==', { desc = '' })
 vim.keymap.set('v', '<A-k>', ':m .-2<CR>==', { desc = '' })
