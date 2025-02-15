@@ -113,6 +113,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>ge', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>gq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', { desc = '' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -140,48 +141,57 @@ vim.keymap.set('n', '<leader>vs', ':vsplit<CR>', { desc = 'Vertical Split' })
 vim.keymap.set('n', '<leader>hs', ':split<CR>', { desc = 'Horizontal Split' })
 
 -- Keybinds to manipulate tabs
-vim.keymap.set('n', '<M-L>', ':bn<CR>', { desc = '' })
-vim.keymap.set('n', '<M-H>', ':bp<CR>', { desc = '' })
-vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = '' })
+vim.keymap.set('n', '<M-L>', ':bn<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<M-H>', ':bp<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = 'Close buffer' })
 
 -- Keybinds for VimWiki
-vim.keymap.set('n', '<leader>vwi', ':VimwikiIndex<CR>', { desc = '' })
-vim.keymap.set('n', '<leader>vwu', ':VimwikiUISelect<CR>', { desc = '' })
+vim.keymap.set('n', '<leader>vwi', ':VimwikiIndex<CR>', { desc = 'Open VimWiki' })
+vim.keymap.set('n', '<leader>vwu', ':VimwikiUISelect<CR>', { desc = 'Selct VimWiki' })
 
 -- Spelling On/Off
-vim.keymap.set('n', '<F6>', ':set invspell<cr>', { desc = '' })
+vim.keymap.set('n', '<F6>', ':set invspell<cr>', { desc = 'Toggle spell check' })
 
 -- Auto complete brackets etc.
-vim.keymap.set('i', '"', '""<Esc>i', { desc = '' })
-vim.keymap.set('i', '""', '"', { desc = '' })
-vim.keymap.set('i', '(', '()<Esc>i', { desc = '' })
-vim.keymap.set('i', '{', '{}<Esc>i', { desc = '' })
-vim.keymap.set('i', '[', '[]<Esc>i', { desc = '' })
+vim.keymap.set('i', '"', '""<Esc>i', { desc = 'Complete brackets' })
+vim.keymap.set('i', '""', '"', { desc = 'Do single brackets' })
+vim.keymap.set('i', '(', '()<Esc>i', { desc = 'Complete brackets' })
+vim.keymap.set('i', '{', '{}<Esc>i', { desc = 'Complete brackets' })
+vim.keymap.set('i', '[', '[]<Esc>i', { desc = 'Complete brackets' })
 
 -- Delete word with ctrl backspace
-vim.keymap.set('i', '<C-BS>', '<Esc>bcw', { desc = '' })
+vim.keymap.set('i', '<C-BS>', '<Esc>bcw', { desc = 'Delete previous with Ctrl+BS' })
 
 -- Move up or down a soft-wrapped line
-vim.keymap.set('n', '<C-S-j>', 'gj', { desc = '' })
-vim.keymap.set('n', '<C-S-k>', 'gk', { desc = '' })
+vim.keymap.set('n', '<C-S-j>', 'gj', { desc = 'Move through soft-wrapped lines' })
+vim.keymap.set('n', '<C-S-k>', 'gk', { desc = 'Move through soft-wrapped lines' })
 
 -- Move text up and down
-vim.keymap.set('v', '<A-j>', ':m .+1<CR>==', { desc = '' })
-vim.keymap.set('v', '<A-k>', ':m .-2<CR>==', { desc = '' })
+vim.keymap.set('v', '<A-j>', ':m .+1<CR>==', { desc = 'Move selectin' })
+vim.keymap.set('v', '<A-k>', ':m .-2<CR>==', { desc = 'Move selectin' })
 
 -- Visual Block --
 -- Move text up and down
-vim.keymap.set('x', 'J', ":move '>+1<CR>gv-gv", { desc = '' })
-vim.keymap.set('x', 'K', ":move '<-2<CR>gv-gv", { desc = '' })
-vim.keymap.set('x', '<A-j>', ":move '>+1<CR>gv-gv", { desc = '' })
-vim.keymap.set('x', '<A-k>', ":move '<-2<CR>gv-gv", { desc = '' })
+vim.keymap.set('x', 'J', ":move '>+1<CR>gv-gv", { desc = 'Move selectin' })
+vim.keymap.set('x', 'K', ":move '<-2<CR>gv-gv", { desc = 'Move selectin' })
+vim.keymap.set('x', '<A-j>', ":move '>+1<CR>gv-gv", { desc = 'Move selectin' })
+vim.keymap.set('x', '<A-k>', ":move '<-2<CR>gv-gv", { desc = 'Move selectin' })
 
 -- Stay in indent mode
-vim.keymap.set('v', '<', '<gv', { desc = '' })
-vim.keymap.set('v', '>', '>gv', { desc = '' })
+vim.keymap.set('v', '<', '<gv', { desc = 'Stay in indent mode' })
+vim.keymap.set('v', '>', '>gv', { desc = 'Stay in indent mode' })
 
 -- Copy to system clipboard
-vim.keymap.set('v', '<F5>', '"+y', { desc = '' })
+vim.keymap.set('v', '<F5>', '"+y', { desc = 'Copy to system clipboard' })
+
+-- Toggle diagnostics
+vim.keymap.set('n', '<leader>tt', function()
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.disable()
+  else
+    vim.diagnostic.enable()
+  end
+end, { desc = 'Toggle diagnostics' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
