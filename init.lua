@@ -183,6 +183,7 @@ vim.keymap.set('v', '>', '>gv', { desc = 'Stay in indent mode' })
 
 -- Copy to system clipboard
 vim.keymap.set('v', '<F5>', '"+y', { desc = 'Copy to system clipboard' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
 
 -- Toggle diagnostics
 vim.keymap.set('n', '<leader>tt', function()
