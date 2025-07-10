@@ -185,6 +185,16 @@ vim.keymap.set('v', '>', '>gv', { desc = 'Stay in indent mode' })
 vim.keymap.set('v', '<F5>', '"+y', { desc = 'Copy to system clipboard' })
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
 
+-- #######################################################
+-- ###########Plugin Settings#############################
+-- #######################################################
+
+-- Make VimWiki's files behave like markdown
+vim.treesitter.language.register('markdown', 'vimwiki')
+
+-- Toggle twilight
+vim.keymap.set('n', '<leader>tl', ':Twilight<CR>', { desc = 'Toggle Twilight mode' })
+
 -- Toggle diagnostics
 vim.keymap.set('n', '<leader>tt', function()
   if vim.diagnostic.is_enabled() then
@@ -193,6 +203,35 @@ vim.keymap.set('n', '<leader>tt', function()
     vim.diagnostic.enable()
   end
 end, { desc = 'Toggle diagnostics' })
+
+-- venn.nvim: enable or disable keymappings
+function _G.Toggle_venn()
+  local venn_enabled = vim.inspect(vim.b.venn_enabled)
+  if venn_enabled == 'nil' then
+    vim.b.venn_enabled = true
+    vim.cmd [[setlocal ve=all]]
+    -- draw a line on HJKL keystokes
+    vim.api.nvim_buf_set_keymap(0, 'n', 'J', '<C-v>j:VBox<CR>', { noremap = true })
+    vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<C-v>k:VBox<CR>', { noremap = true })
+    vim.api.nvim_buf_set_keymap(0, 'n', 'L', '<C-v>l:VBox<CR>', { noremap = true })
+    vim.api.nvim_buf_set_keymap(0, 'n', 'H', '<C-v>h:VBox<CR>', { noremap = true })
+    -- draw a box by pressing "f" with visual selection
+    vim.api.nvim_buf_set_keymap(0, 'v', 'f', ':VBox<CR>', { noremap = true })
+  else
+    vim.cmd [[setlocal ve=]]
+    vim.api.nvim_buf_del_keymap(0, 'n', 'J')
+    vim.api.nvim_buf_del_keymap(0, 'n', 'K')
+    vim.api.nvim_buf_del_keymap(0, 'n', 'L')
+    vim.api.nvim_buf_del_keymap(0, 'n', 'H')
+    vim.api.nvim_buf_del_keymap(0, 'v', 'f')
+    vim.b.venn_enabled = nil
+  end
+end
+-- toggle keymappings for venn using <leader>v
+vim.api.nvim_set_keymap('n', '<leader>venn', ':lua Toggle_venn()<CR>', { noremap = true })
+
+-- #######################################################
+-- #######################################################
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -959,6 +998,51 @@ require('lazy').setup({
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   -- { import = 'custom.plugins' },
+  {
+    '3rd/image.nvim',
+    build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
+    opts = {
+      processor = 'magick_cli',
+    },
+  },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      file_types = { 'markdown', 'vimwiki' },
+      render_modes = true,
+    },
+  },
+  {
+    'folke/twilight.nvim',
+    opts = {
+      dimming = {
+        alpha = 0.25, -- amount of dimming
+        -- we try to get the foreground from the highlight groups or fallback color
+        color = { 'Normal', '#ffffff' },
+        term_bg = '#000000', -- if guibg=NONE, this will be used to calculate text color
+        inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
+      },
+      context = 10, -- amount of lines we will try to show around the current line
+      treesitter = true, -- use treesitter when available for the filetype
+      -- treesitter is used to automatically expand the visible text,
+      -- but you can further control the types of nodes that should always be fully expanded
+      expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
+        'function',
+        'method',
+        'table',
+        'if_statement',
+      },
+      exclude = {}, -- exclude these filetypes
+    },
+  },
+  {
+    'jbyuki/venn.nvim',
+  },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
