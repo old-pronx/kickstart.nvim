@@ -231,6 +231,25 @@ end
 vim.api.nvim_set_keymap('n', '<leader>venn', ':lua Toggle_venn()<CR>', { noremap = true })
 
 -- #######################################################
+-- #########Autoscripts for toggeling rellinenumbers######
+-- #######################################################
+
+local numbertoggle = vim.api.nvim_create_augroup('numbertoggle', { clear = true })
+
+vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' }, {
+  group = numbertoggle,
+  pattern = '*',
+  command = "if &nu && mode() != 'i' | set rnu | endif",
+})
+
+vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave' }, {
+  group = numbertoggle,
+  pattern = '*',
+  command = 'if &nu | set nornu | endif',
+})
+
+-- #######################################################
+-- #######################################################
 -- #######################################################
 
 -- [[ Basic Autocommands ]]
