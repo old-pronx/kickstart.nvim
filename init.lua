@@ -95,6 +95,9 @@ vim.opt.tabstop = 8
 vim.opt.shiftwidth = 8
 vim.opt.expandtab = false
 
+-- Change Folder automatically to the current file
+vim.opt.acd = true
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
