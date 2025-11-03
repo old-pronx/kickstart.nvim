@@ -108,7 +108,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Open file explorer, quit, save & quit
 vim.keymap.set('n', '<leader>e', ':Lex 30<cr>', { desc = 'Lexplore' })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quick :q' })
-vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Quick :q' })
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Quick :w' })
 vim.keymap.set('n', '<leader>x', ':x<CR>', { desc = 'Quick :x' })
 
 -- Diagnostic keymaps
@@ -147,6 +147,7 @@ vim.keymap.set('n', '<leader>hs', ':split<CR>', { desc = 'Horizontal Split' })
 vim.keymap.set('n', '<M-L>', ':bn<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<M-H>', ':bp<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<leader>k', ':bd<CR>', { desc = 'Close buffer' })
 
 -- Keybinds for VimWiki
 vim.keymap.set('n', '<leader>vwi', ':VimwikiIndex<CR>', { desc = 'Open VimWiki' })
