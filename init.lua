@@ -144,10 +144,16 @@ vim.keymap.set('n', '<leader>vs', ':vsplit<CR>', { desc = 'Vertical Split' })
 vim.keymap.set('n', '<leader>hs', ':split<CR>', { desc = 'Horizontal Split' })
 
 -- Keybinds to manipulate tabs
-vim.keymap.set('n', '<M-L>', ':bn<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<M-H>', ':bp<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '<M-l>', ':bn<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<M-h>', ':bp<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = 'Close buffer' })
 vim.keymap.set('n', '<leader>k', ':bd<CR>', { desc = 'Close buffer' })
+
+-- Keybinds to resize splits
+vim.keymap.set('n', '<M-K>', ':resize +2<CR>', { desc = 'Move split up' })
+vim.keymap.set('n', '<M-J>', ':resize -2<CR>', { desc = 'Move split down' })
+vim.keymap.set('n', '<M-L>', ':vertical resize +2<CR>', { desc = 'Move split right' })
+vim.keymap.set('n', '<M-H>', ':vertical resize -2<CR>', { desc = 'Move split left' })
 
 -- Keybinds for VimWiki
 vim.keymap.set('n', '<leader>vwi', ':VimwikiIndex<CR>', { desc = 'Open VimWiki' })
