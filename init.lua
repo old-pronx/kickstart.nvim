@@ -1093,7 +1093,8 @@ require('lazy').setup({
   {
     'junegunn/vim-easy-align',
     config = function()
-      vim.keymap.set('v', 'ga', ':EasyAlign ', { desc = 'EasyAlign' })
+      -- vim.keymap.set('v', 'ga', ':EasyAlign ', { desc = 'EasyAlign' })
+      vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = true })
     end,
   },
 }, {
