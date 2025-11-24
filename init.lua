@@ -716,13 +716,13 @@ require('lazy').setup({
         -- tsserver = {},
         --
 
-        ltex = {
-          settings = {
-            ltex = {
-              language = 'auto',
-            },
-          },
-        },
+        -- ltex = {
+        --   settings = {
+        --     ltex = {
+        --       language = 'auto',
+        --     },
+        --   },
+        -- },
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
