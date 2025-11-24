@@ -1099,6 +1099,17 @@ require('lazy').setup({
       -- vim.g.easy_align_interactive_modes = { 'r', 'l' }
     end,
   },
+  {
+    'sainnhe/everforest',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- Optionally configure and load the colorscheme
+      -- directly inside the plugin declaration.
+      vim.g.everforest_enable_italic = true
+      vim.cmd.colorscheme 'everforest'
+    end,
+  },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
