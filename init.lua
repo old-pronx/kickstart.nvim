@@ -1095,6 +1095,19 @@ require('lazy').setup({
     config = function()
       -- vim.keymap.set('v', 'ga', ':EasyAlign ', { desc = 'EasyAlign' })
       vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = true })
+      vim.g.easy_align_options = 'lm=1,stl=0'
+      -- vim.g.easy_align_interactive_modes = { 'r', 'l' }
+    end,
+  },
+  {
+    'sainnhe/everforest',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- Optionally configure and load the colorscheme
+      -- directly inside the plugin declaration.
+      vim.g.everforest_enable_italic = true
+      vim.cmd.colorscheme 'everforest'
     end,
   },
 }, {
