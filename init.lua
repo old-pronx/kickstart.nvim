@@ -1096,6 +1096,7 @@ require('lazy').setup({
       -- vim.keymap.set('v', 'ga', ':EasyAlign ', { desc = 'EasyAlign' })
       vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = true })
       vim.g.easy_align_options = 'lm=1,stl=0'
+      vim.keymap.set('x', 'x', ':EasyAlign *&<CR>', { desc = 'Align &-symbols' })
       -- vim.g.easy_align_interactive_modes = { 'r', 'l' }
     end,
   },
