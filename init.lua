@@ -198,8 +198,8 @@ vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
 -- ##################
 -- ## Theme #########
 -- ##################
-local colorscheme = 'retrobox'
-local _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
+-- local colorscheme = 'retrobox'
+-- local _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 vim.o.background = 'dark' -- or "light" for light mode
 
 -- #######################################################
@@ -719,7 +719,11 @@ require('lazy').setup({
         ltex_plus = {
           settings = {
             ltex = {
-              language = 'auto',
+              language = 'en-GB',
+              checkFrequency = 'save',
+              additionalRules = {
+                motherTongue = 'de-DE',
+              },
             },
           },
         },
