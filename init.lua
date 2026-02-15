@@ -116,7 +116,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>ge', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>gq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', { desc = '' })
+vim.keymap.set('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Code action' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -194,6 +194,9 @@ vim.keymap.set('v', '>', '>gv', { desc = 'Stay in indent mode' })
 -- Copy to system clipboard
 vim.keymap.set('v', '<F5>', '"+y', { desc = 'Copy to system clipboard' })
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
+
+-- xdg open clipboard
+vim.keymap.set('n', '<leader>gl', ":execute '! xdg-open '.shellescape(@\", 1) <CR>", { desc = 'xdg-open current clipboard' })
 
 -- ##################
 -- ## Theme #########
