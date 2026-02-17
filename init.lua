@@ -212,6 +212,9 @@ vim.o.background = 'dark' -- or "light" for light mode
 -- Make VimWiki's files behave like markdown
 vim.treesitter.language.register('markdown', 'vimwiki')
 
+-- Tell Treesitter to use the 'bash' parser for 'zsh' files
+vim.treesitter.language.register('bash', 'zsh')
+
 -- Toggle twilight
 vim.keymap.set('n', '<leader>tl', ':Twilight<CR>', { desc = 'Toggle Twilight mode' })
 
@@ -719,6 +722,9 @@ require('lazy').setup({
         -- tsserver = {},
         --
 
+        bashls = {
+          filetypes = { 'sh', 'zsh', 'bash' },
+        },
         ltex_plus = {
           settings = {
             ltex = {
@@ -762,18 +768,24 @@ require('lazy').setup({
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      }
+      for name, server in pairs(servers) do
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        vim.lsp.config(name, server)
+        vim.lsp.enable(name)
+      end
+
+      -- require('mason-lspconfig').setup {
+      --   handlers = {
+      --     function(server_name)
+      --       local server = servers[server_name] or {}
+      --       -- This handles overriding only values explicitly passed
+      --       -- by the server configuration above. Useful when disabling
+      --       -- certain features of an LSP (for example, turning off formatting for tsserver)
+      --       server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+      --       require('lspconfig')[server_name].setup(server)
+      --     end,
+      --   },
+      -- }
     end,
   },
 
