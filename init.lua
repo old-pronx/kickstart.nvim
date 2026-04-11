@@ -726,6 +726,7 @@ require('lazy').setup({
           filetypes = { 'sh', 'zsh', 'bash' },
         },
         ltex_plus = {
+          filetypes = { 'tex' },
           settings = {
             ltex = {
               language = 'en-GB',
